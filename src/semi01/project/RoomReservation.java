@@ -1,0 +1,91 @@
+package semi01.project;
+
+public class RoomReservation {
+
+    String name; // 예약자명
+    int reserveDate; // 숙박일수
+    String reserveRoom; // 예약할 룸
+    int people; // 머무를 사람 수
+    int Pay; // 1박당 가격
+    double discountRate; // 할인율
+    boolean breakfast; // 조식제공
+
+    // 생성자
+    public RoomReservation(String name, int reserveDate, String reserveRoom, int people) {
+        this.name = name;
+        this.reserveDate = reserveDate;
+        this.reserveRoom = reserveRoom;
+        this.people = people;
+        initiatingRoomReserve();
+    }
+
+    // 객체 초기화 메서드
+    void initiatingRoomReserve() {
+        if (people > 1) {
+            throw new IllegalArgumentException("인원 제한을 넘어 예약하실 수 없습니다.");
+        }
+        Pay = 100000;
+        breakfast = false; // 스위트룰 이전까지는 조식 제공 없음을 확인할 수 있도록 작성함
+        discountRate = 0.0;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getReserveDate() {
+        return reserveDate;
+    }
+
+    public void setReserveDate(int reserveDate) {
+        this.reserveDate = reserveDate;
+    }
+
+    public String getReserveRoom() {
+        return reserveRoom;
+    }
+
+    public void setReserveRoom(String reserveRoom) {
+        this.reserveRoom = reserveRoom;
+    }
+
+    public int getPeople() {
+        return people;
+    }
+
+    public void setPeople(int people) {
+        this.people = people;
+    }
+
+    public int getPay() {
+        return Pay;
+    }
+
+    public void setPay(int pay) {
+        Pay = pay;
+    }
+
+    public double getDiscountRate() {
+        return discountRate;
+    }
+
+    public void setDiscountRate(double discountRate) {
+        this.discountRate = discountRate;
+    }
+
+    public boolean isBreakfast() {
+        return breakfast;
+    }
+
+    public void setBreakfast(boolean breakfast) {
+        this.breakfast = breakfast;
+    }
+
+    public int calcPay(int pay) {
+        return pay;
+    }
+}
