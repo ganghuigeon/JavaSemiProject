@@ -1,15 +1,14 @@
 package semi01.project;
 
-public class TwinRoomReservation extends RoomReservation{
-        public TwinRoomReservation(String name, int reserveDate, String reserveRoom, int people) {
-            super(name, reserveDate, reserveRoom, people);
-            super.Pay = 250000;
-            if (reserveDate >= 3) {
-                this.discountRate = 0.1;
-            } else {
-                this.discountRate = 0.0; // 3일 미만은 할인율 없음
-            }
+public class TwinRoomReservation extends RoomReservation {
+    public TwinRoomReservation(String name, int reserveDate, String reserveRoom, int people) {
+        super(name, reserveDate, reserveRoom, people, 250000); // 1박당 가격을 250000으로 설정
+        if (reserveDate >= 3) {
+            this.discountRate = 0.1;
+        } else {
+            this.discountRate = 0.0; // 3일 미만은 할인율 없음
         }
+    }
 
     @Override
     void initiatingRoomReserve() {
@@ -19,8 +18,10 @@ public class TwinRoomReservation extends RoomReservation{
     }
 
     @Override
-        public int calcPay(int pay) {
-            return pay - (int) (pay * discountRate); //지불할 금액
-        }
+    public int calcPay(int pay) {
+        int discountedPay = (int) (super.calcPay(pay)*discountRate); // 할인된 금액을 계산
+        return discountedPay;
     }
 
+
+}
