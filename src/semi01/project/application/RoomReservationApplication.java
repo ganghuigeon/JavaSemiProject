@@ -1,3 +1,5 @@
+package semi01.project.application;
+
 import semi01.project.DoubleRoomReservation;
 import semi01.project.RoomReservation;
 import semi01.project.SuiteRoomReservation;
@@ -169,7 +171,29 @@ public class RoomReservationApplication {
         System.out.println("부가 서비스: " + singleRoom.isBreakfast());
         System.out.println();
 
-        // 이하 코드 생략
+        RoomReservation doubleRoom = new RoomReservation("double", 1, "double", 2, 150000);
+        System.out.println("더블 룸 정보");
+        System.out.println("방 종류: " + singleRoom.getReserveRoom());
+        System.out.println("최대 투숙 인원: " + singleRoom.getPeople());
+        System.out.println("가격: " + singleRoom.getPayPerNight() + "원");
+        System.out.println("부가 서비스: " + singleRoom.isBreakfast());
+        System.out.println();
+
+        RoomReservation twinRoom = new RoomReservation("twin", 1, "twin", 1, 250000);
+        System.out.println("트윈 룸 정보");
+        System.out.println("방 종류: " + singleRoom.getReserveRoom());
+        System.out.println("최대 투숙 인원: " + singleRoom.getPeople());
+        System.out.println("가격: " + singleRoom.getPayPerNight() + "원");
+        System.out.println("부가 서비스: " + singleRoom.isBreakfast());
+        System.out.println();
+
+        RoomReservation suiteRoom = new RoomReservation("Suite", 1, "suite", -1, 500000);
+        System.out.println("싱글 룸 정보");
+        System.out.println("방 종류: " + singleRoom.getReserveRoom());
+        System.out.println("최대 투숙 인원: " + singleRoom.getPeople());
+        System.out.println("가격: " + singleRoom.getPayPerNight() + "원");
+        System.out.println("부가 서비스: " + singleRoom.isBreakfast());
+        System.out.println();
     }
 
     private static void CustomerInfo() {
@@ -184,7 +208,7 @@ public class RoomReservationApplication {
                 System.out.println("숙박일수: " + reservation.getReserveDate());
                 System.out.println("룸 타입: " + reservation.getReserveRoom());
                 System.out.println("머무를 사람 수: " + reservation.getPeople());
-                System.out.println("지불 금액: " + reservation.getPay());
+                System.out.println("지불 금액: " + reservation.calcPay(reservation.getPay()));
                 System.out.println("부가 서비스: " + (reservation.isBreakfast() ? "포함" : "미포함"));
                 System.out.println();
             }
