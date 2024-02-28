@@ -12,6 +12,11 @@ public class SuiteRoomReservation extends RoomReservation {
     }
 
     @Override
+    void initiatingRoomReserve() {
+        // 이 메서드는 부모 클래스에서 구현되어 있지 않으므로 삭제
+    }
+
+    @Override
     public int calcPay(int pay) {
         int discountedPay = super.calcPay(pay); // 할인된 금액을 계산
         return discountedPay;

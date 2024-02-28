@@ -11,7 +11,7 @@ public class RoomReservation {
     boolean breakfast; // 조식제공
 
 
-
+    // 생성자
     public RoomReservation(String name, int reserveDate, String reserveRoom, int people, int payPerNight) {
         this.name = name;
         this.reserveDate = reserveDate;
@@ -21,6 +21,7 @@ public class RoomReservation {
         initiatingRoomReserve();
     }
 
+    // 객체 초기화 메서드
     void initiatingRoomReserve() {
         if (people > 1) {
             throw new IllegalArgumentException("인원 제한을 넘어 예약하실 수 없습니다.");

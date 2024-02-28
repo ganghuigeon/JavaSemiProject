@@ -170,29 +170,28 @@ public class RoomReservationApplication {
         System.out.println("가격: " + singleRoom.getPayPerNight() + "원");
         System.out.println("부가 서비스: " + singleRoom.isBreakfast());
         System.out.println();
-
-        RoomReservation doubleRoom = new RoomReservation("double", 1, "double", 2, 150000);
+        RoomReservation doubleRoom = new RoomReservation("Double", 1, "Double", 2, 150000);
         System.out.println("더블 룸 정보");
-        System.out.println("방 종류: " + singleRoom.getReserveRoom());
-        System.out.println("최대 투숙 인원: " + singleRoom.getPeople());
-        System.out.println("가격: " + singleRoom.getPayPerNight() + "원");
-        System.out.println("부가 서비스: " + singleRoom.isBreakfast());
+        System.out.println("방 종류: " + doubleRoom.getReserveRoom());
+        System.out.println("최대 투숙 인원: " + doubleRoom.getPeople());
+        System.out.println("가격: " + doubleRoom.getPayPerNight() + "원");
+        System.out.println("부가 서비스: " + (doubleRoom.isBreakfast() ? "포함" : "미포함"));
         System.out.println();
 
-        RoomReservation twinRoom = new RoomReservation("twin", 1, "twin", 1, 250000);
+        RoomReservation twinRoom = new RoomReservation("Twin", 1, "Twin", 3, 250000);
         System.out.println("트윈 룸 정보");
-        System.out.println("방 종류: " + singleRoom.getReserveRoom());
-        System.out.println("최대 투숙 인원: " + singleRoom.getPeople());
-        System.out.println("가격: " + singleRoom.getPayPerNight() + "원");
-        System.out.println("부가 서비스: " + singleRoom.isBreakfast());
+        System.out.println("방 종류: " + twinRoom.getReserveRoom());
+        System.out.println("최대 투숙 인원: " + twinRoom.getPeople());
+        System.out.println("가격: " + twinRoom.getPayPerNight() + "원");
+        System.out.println("부가 서비스: " + (twinRoom.isBreakfast() ? "포함" : "미포함"));
         System.out.println();
 
-        RoomReservation suiteRoom = new RoomReservation("Suite", 1, "suite", -1, 500000);
-        System.out.println("싱글 룸 정보");
-        System.out.println("방 종류: " + singleRoom.getReserveRoom());
-        System.out.println("최대 투숙 인원: " + singleRoom.getPeople());
-        System.out.println("가격: " + singleRoom.getPayPerNight() + "원");
-        System.out.println("부가 서비스: " + singleRoom.isBreakfast());
+        RoomReservation suiteRoom = new RoomReservation("Suite", 1, "Suite", -1, 500000);
+        System.out.println("스위트 룸 정보");
+        System.out.println("방 종류: " + suiteRoom.getReserveRoom());
+        System.out.println("최대 투숙 인원: " + (suiteRoom.getPeople() == -1 ? "제한 없음" : suiteRoom.getPeople()));
+        System.out.println("가격: " + suiteRoom.getPayPerNight() + "원");
+        System.out.println("부가 서비스: " + (suiteRoom.isBreakfast() ? "포함" : "미포함"));
         System.out.println();
     }
 
@@ -228,7 +227,7 @@ public class RoomReservationApplication {
                 System.out.println("숙박일수: " + reservation.getReserveDate());
                 System.out.println("룸 타입: " + reservation.getReserveRoom());
                 System.out.println("머무를 사람 수: " + reservation.getPeople());
-                System.out.println("지불 금액: " + reservation.getPay());
+                System.out.println("지불 금액: " + reservation.calcPay(reservation.getPay()));
                 System.out.println("부가 서비스: " + (reservation.isBreakfast() ? "포함" : "미포함"));
                 System.out.println();
                 found = true;

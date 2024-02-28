@@ -19,7 +19,7 @@ public class DoubleRoomReservation extends RoomReservation {
 
     @Override
     public int calcPay(int pay) {
-        int discountedPay = pay - (int) (pay * discountRate); // 할인된 금액 계산
+        int discountedPay = super.calcPay(pay); // 할인된 금액을 계산
         return discountedPay;
     }
 }
