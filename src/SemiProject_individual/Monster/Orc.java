@@ -1,6 +1,6 @@
 package SemiProject_individual.Monster;
 
-import SemiProject_individual.PC;
+import SemiProject_individual.Character.PC;
 
 public class Orc implements Monster {
     private String name;

@@ -1,8 +1,7 @@
 package SemiProject_individual.Executor;
 
-import SemiProject_individual.Character;
-import SemiProject_individual.NPC.NPC;
-import SemiProject_individual.PC;
+import SemiProject_individual.Character.NPC;
+import SemiProject_individual.Character.PC;
 import SemiProject_individual.Monster.Goblin;
 import SemiProject_individual.Monster.Gnoll;
 import SemiProject_individual.Monster.Orc;

@@ -1,12 +1,11 @@
-package SemiProject_individual.NPC;
+package SemiProject_individual.Character;
 
-import SemiProject_individual.Character;
 import SemiProject_individual.Item;
 
 import java.util.List;
 import java.util.Random;
 
-public class NPC implements Character {
+public class NPC extends Character {
     private String name;
     private int health;
     private int damage;
@@ -64,12 +63,19 @@ public class NPC implements Character {
 
     @Override
     public void Virtue(int amount) {
-        // 선성향 NPC 설정
+        // 선한 성향 플레이어에 대한 대응 설정
+        if (amount > 0) {
+            System.out.println(this.name + "은(는) 선한 성향을 갖고 있는 플레이어에 대한 행동을 취합니다.");
+            // 추가적인 행동 구현
+        }
     }
-
     @Override
     public void Vice(int amount) {
-        // 악성향 NPC 설정
+        // 악한 성향 플레이어에 대한 대응 설정
+        if (amount < 0) {
+            System.out.println(this.name + "은(는) 악한 성향을 갖고 있는 플레이어에 대한 행동을 취합니다.");
+            // 추가적인 행동 구현
+        }
     }
 
     @Override

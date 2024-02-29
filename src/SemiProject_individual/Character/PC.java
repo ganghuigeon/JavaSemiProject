@@ -1,10 +1,12 @@
-package SemiProject_individual;
+package SemiProject_individual.Character;
+
+import SemiProject_individual.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class PC implements Character {
+public class PC extends Character {
     private String name; // 캐릭터 이름
     private int level; // 레벨
     private int health;
