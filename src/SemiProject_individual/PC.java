@@ -26,11 +26,11 @@ public class PC implements Character {
         scanner.close(); // 스캐너 리소스 해제
     }
 
-    private void initializeStats() {
-        this.health = 100 + (this.level - 1) * 100; // 1레벨 체력 100, 레벨이 1씩 증가할때마다 100씩 증가
-        this.damage = 10 + (this.level - 1) * 10; //1레벨 공격력 10, 레벨이 1씩 증가할 때 마다 10씩 증가
-        this.armor = 5 + (this.level - 1) * 5; //1레벨 방어력 5, 레벨이 1씩 증가할 때 마다 5씩 증가
-        this.experience = 0; // 경험치 초기화
+    private void initializeStats() { //초기 스탯 설정,
+        this.health = 100;
+        this.damage = 10;
+        this.armor = 5;
+        this.experience = 0;
     }
 
     @Override
@@ -116,8 +116,9 @@ public class PC implements Character {
 
     private void increaseStats() {
         // 스탯 증가 메소드 (레벨업 시 호출)
-        this.health += 20; // 체력 증가
-        this.damage += 5; // 공격력 증가
+        this.health += 100; // 체력 증가
+        this.damage += 10; // 공격력 증가
+        this.armor += 5; // 방어력 증가
     }
 
     @Override
