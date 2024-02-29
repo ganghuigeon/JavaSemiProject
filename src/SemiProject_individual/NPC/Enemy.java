@@ -1,4 +1,6 @@
-package SemiProject_individual;
+package SemiProject_individual.NPC;
+
+import SemiProject_individual.NPC.NPC;
 
 public class Enemy extends NPC {
     @Override
