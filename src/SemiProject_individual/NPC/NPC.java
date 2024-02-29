@@ -12,11 +12,12 @@ public class NPC implements Character {
     private int damage;
     private int armor;
     private int level; // NPC레벨
-    private int vL; // 성향 수치
+    protected int vL; // 성향 수치
 
     public NPC(String name) {
         this.name = name;
         this.level = generateRandomLevel();
+        this.vL = generateRandomvL();
         initializeStats(); // 레벨에 따라 스탯 초기화
     }
 
@@ -30,11 +31,15 @@ public class NPC implements Character {
         return random.nextInt(5) + 1; // 1부터 5까지의 랜덤한 값 선택
     }
 
+    private int generateRandomvL() {
+        return random.nextInt(100) + (-100);
+    }
+
     private void initializeStats() {
         // 레벨에 따라 초기 스탯 설정
         this.health = 100 + (this.level - 1) * 100; // 1레벨 체력 100, 레벨이 1씩 증가할때마다 100씩 증가
         this.damage = 10 + (this.level - 1) * 10; //1레벨 공격력 10, 레벨이 1씩 증가할 때 마다 10씩 증가
-        this.armor = 5 + (this.level - 1) * 5;
+        this.armor = 5 + (this.level - 1) * 5; //1레벨 방어력 5, 레벨이 1씩 증가할 때 마다 5씩 증가
     }
 
     public int getLevel() {
@@ -43,6 +48,18 @@ public class NPC implements Character {
 
     @Override
     public void takeDamage(int damage) {
+        int actualDamage = Math.max(damage - this.armor, 0);
+        this.health -= actualDamage;
+        System.out.println(this.name + "이(가) " + actualDamage + "의 피해를 입었습니다.");
+
+        if (!this.isAlive()) {
+            System.out.println(this.name + "이(가) 사망하였습니다.");
+        }
+    }
+
+    @Override
+    public int getVL() {
+        return 0;
     }
 
     @Override
@@ -57,7 +74,7 @@ public class NPC implements Character {
 
     @Override
     public void performAction(String Action) {
-        // Virtue, Vice 각각에 맞는 NPC행동 발생
+        //일반적인 NPC행동 반경
     }
 
     @Override
@@ -77,7 +94,12 @@ public class NPC implements Character {
     }
 
     @Override
-    public void interactWith(Character character) {
+    public void interactWithGood(Character character) {
+
+    }
+
+    @Override
+    public void interactWithBad(Character character) {
 
     }
 

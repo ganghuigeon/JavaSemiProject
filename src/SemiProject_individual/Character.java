@@ -8,9 +8,12 @@ import java.util.List;
         boolean isAlive(); //생존 여부
         int getExperience(); //경험치
         void adjustExperience(int amount);
-        void interactWith(Character character);
+        void interactWithGood(Character character);
+        void interactWithBad(Character character);
         List<Item> getInventory();
         void useInventory(Item item, int quantity);
         String getName();
         void takeDamage(int damage);
+
+        int getVL();
     }

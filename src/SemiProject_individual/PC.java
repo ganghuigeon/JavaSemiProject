@@ -88,6 +88,11 @@ public class PC implements Character {
     }
 
     @Override
+    public int getVL() {
+        return 0;
+    }
+
+    @Override
     public boolean isAlive() {
         return health > 0; // 생존 상태를 확인하여 반환
     }
@@ -122,9 +127,23 @@ public class PC implements Character {
     }
 
     @Override
-    public void interactWith(Character character) {
-        // 다른 캐릭터와 상호 작용하는 메소드. 선한 성향인 플레이어 캐릭터, 일반 성향의 플레이어 캐릭터, 악한 성향의 플레이어 캐릭터에 따른 설정 적용 예정
-        // 간단하게만 구현하고 남은 시간에 따라 상세 구현 예정
+    public void interactWithGood(Character character) {
+        String interaction = switch (Integer.compare(this.vL, character.getVL())) {
+            case 40 -> this.name + "은(는) " + character.getName() + "을(를)  친근한 모습입니다.";
+            case -40 -> this.name + "은(는) " + character.getName() + "과(와) 대적인 모습입니다.";
+            default -> this.name + "은(는) " + character.getName() + "과(와) 일반적인 대화를 합니다.";
+        };
+        System.out.println(interaction);
+    }
+
+    @Override
+    public void interactWithBad(Character character) {
+        String interaction = switch (Integer.compare(this.vL, character.getVL())) {
+            case 40 -> this.name + "은(는) " + character.getName() + "을(를) 적대적인 모습입니다.";
+            case -40 -> this.name + "은(는) " + character.getName() + "과(와) 친근한 모습입니다.";
+            default -> this.name + "은(는) " + character.getName() + "과(와) 일반적인 대화를 합니다.";
+        };
+        System.out.println(interaction);
     }
 
     @Override
@@ -152,5 +171,8 @@ public class PC implements Character {
 
     public int getDamage() {
         return this.damage; // 공격력 반환
+    }
+
+    public void setHealth(int playerNewHealth) {
     }
 }
