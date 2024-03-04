@@ -101,12 +101,12 @@ public class NPC extends Character {
 
     @Override
     public void interactWithGood(Character character) {
-
+    //선성향 NPC가 플레이어  성향에 따른 방향성을 설정, 개발 기간에 따라 추가 예정
     }
 
     @Override
     public void interactWithBad(Character character) {
-
+    //악성향 NPC가 플레이어 성향에 따른 방향성을 설정, 개발 기간에 따라 추가 예정
     }
 
     @Override

@@ -79,9 +79,9 @@ public class Gnoll implements Monster {
         int actualDamage = Math.max(0, damage - armor); // 실제로 입는 데미지 계산 (방어력만큼 차감)
         this.health -= actualDamage; // 옼스의 체력에서 실제로 입은 데미지를 뺌
 
-        // 옼스가 죽었을 경우
+        // 놀이 죽었을 경우
         if (this.health <= 0) {
-            this.health = 0; // 옼스 체력을 0으로 설정
+            this.health = 0; // 놀 체력을 0으로 설정
             System.out.println(this.getName() + "가 죽었습니다!");
             increaseExperience(3);
             int droppedGold = (int) (Math.random() * 30) + 5; // 5에서 30의 랜덤한 골드를 떨어뜨림

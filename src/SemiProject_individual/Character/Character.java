@@ -60,4 +60,5 @@ public class Character {
     int getVL() {
         return 0;
     }
+
 }

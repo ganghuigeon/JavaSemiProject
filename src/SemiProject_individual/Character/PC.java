@@ -4,6 +4,7 @@ import SemiProject_individual.Item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class PC extends Character {
@@ -29,9 +30,10 @@ public class PC extends Character {
     }
 
     private void initializeStats() { //초기 스탯 설정,
-        this.health = 100;
-        this.damage = 10;
-        this.armor = 5;
+        Random random = new Random();
+        this.health = random.nextInt(50) + 50; // 50에서 100 사이의 랜덤한 값을 선택
+        this.damage = random.nextInt(11) + 5; // 5에서 15 사이의 랜덤한 값을 선택
+        this.armor = random.nextInt(6) + 5; // 5에서 10 사이의 랜덤한 값을 선택
         this.experience = 0;
     }
 
@@ -176,5 +178,13 @@ public class PC extends Character {
     }
 
     public void setHealth(int playerNewHealth) {
+    }
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public void setArmor(int armor) {
+        this.armor = armor;
     }
 }
