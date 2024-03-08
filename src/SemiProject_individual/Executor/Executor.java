@@ -2,6 +2,7 @@ package SemiProject_individual.Executor;
 
 import SemiProject_individual.Character.PC;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Executor {
@@ -44,10 +45,10 @@ public class Executor {
 
                 switch (selectNo) {
                     case 1:
-                        wonder(player);
+                        wonder(player, scanner);
                         break;
                     case 2:
-                        goShopping();
+                        goShopping(scanner);
                         break;
                     case 3:
                         playerInfo(player);
@@ -69,9 +70,7 @@ public class Executor {
         }
     }
 
-    static void wonder(PC player) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("여행에 나섰다...");
+    static void wonder(PC player, Scanner scanner) {
         boolean wondering = true; // while 루프 변수 선언 및 초기화
         while (wondering) {
             System.out.println("==========================");
@@ -82,35 +81,81 @@ public class Executor {
             System.out.println("번호를 입력하여 선택해주세요");
 
             if (scanner.hasNextInt()) {
-                int selectNo = scanner.next();
+                int selectNo = scanner.nextInt();
 
                 switch (selectNo) {
                     case 1:
                         System.out.println("탐험하기를 선택했습니다.");
+                        travle();
                         break;
                     case 2:
                         System.out.println("주변을 둘러봅니다.");
+                        lookAround();
                         break;
                     case 3:
                         System.out.println("정보를 확인합니다.");
+                        lookurself();
                         break;
                     case 4:
                         System.out.println("여행을 끝맺고 돌아갑니다.");
                         wondering = false;
                         break;
                     default:
-                        System.out.println("올바르지 못한 조작입니다. 다시 입력해주세요.");
+                        System.out.println("할 수 없는 행동입니다.");
                 }
-            } else {
-                System.out.println("숫자를 입력해주세요.");
-                scanner.next(); // 입력 버퍼에서 잘못된 입력을 제거합니다.
             }
         }
-        scanner.close(); // 스캐너 객체 닫기
     }
+                public static void travle() {
+                    Random random = new Random();
+                    boolean monsterAppeared = random.nextBoolean(); // 랜덤하게 몬스터가 나타날지 결정
 
-    static void goShopping() {
+                    if (monsterAppeared) {
+                        System.out.println("적이 나타났다...!");
+                    } else {
+                        System.out.println("한적하고 조용하기만 하다...");
+                    }
+
+                }public static void lookAround() {
+
+                }public static void lookurself() {
+
+                }
+
+    static void goShopping(Scanner scanner) {
         System.out.println("여행에 나서기 전 물건을 구비하러 갔다...");
+
+        boolean Buying = true; // while 루프 변수 선언 및 초기화
+        while (Buying) {
+            System.out.println("==========================");
+            System.out.println("상점에 들어왔다...무엇을 할까?");
+            System.out.println("==========================");
+
+            System.out.println("1. 구매 | 2. 판매 | 3. 수리 | 4. 거래를 끝내고 나간다.");
+            System.out.println("번호를 입력하여 선택해주세요");
+
+            if (scanner.hasNextInt()) {
+                int selectNo = scanner.nextInt();
+
+                switch (selectNo) {
+                    case 1:
+                        System.out.println("당신은 물건을 사려 했지만 살 물건이 없었다...");
+                        break;
+                    case 2:
+                        System.out.println("당신은 물건을 팔려고 했지만 팔 물건이 없었다...");
+                        break;
+                    case 3:
+                        System.out.println("수리를 시작합니다.");
+                        break;
+                    case 4:
+                        System.out.println("여행을 끝맺고 돌아갑니다.");
+                        Buying = false;
+                        break;
+                    default:
+                        System.out.println("할 수 없는 행동입니다.");
+                }
+            }
+        }
     }
 
     static void playerInfo(PC player) {
