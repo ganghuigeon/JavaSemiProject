@@ -82,7 +82,7 @@ public class Executor {
             System.out.println("번호를 입력하여 선택해주세요");
 
             if (scanner.hasNextInt()) {
-                int selectNo = scanner.nextLine();
+                int selectNo = scanner.next();
 
                 switch (selectNo) {
                     case 1:
