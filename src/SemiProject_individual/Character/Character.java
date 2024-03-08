@@ -4,10 +4,10 @@ import SemiProject_individual.Item;
 
 import java.util.List;
 
-public class Character {
+public abstract class Character {
 
     void Virtue(int amount) {
-// 선 성향 증가
+        // 선 성향 증가
     }
 
     void Vice(int amount) {

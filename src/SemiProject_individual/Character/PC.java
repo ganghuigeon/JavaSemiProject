@@ -5,7 +5,6 @@ import SemiProject_individual.Item;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 public class PC extends Character {
     private String name; // 캐릭터 이름
@@ -17,16 +16,12 @@ public class PC extends Character {
     private int vL; // 성향 수치
     private List<Item> inventory; // 인벤토리
 
-    public PC() {
-        // 플레이어로부터 이름을 부여 받음
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("캐릭터의 이름을 입력하세요: ");
-        this.name = scanner.nextLine();
+    public PC(String playerName) {
+        this.name = playerName; // playerName을 name에 할당합니다.
         this.level = 1; // 레벨 초기화
         this.vL = 0;
         this.inventory = new ArrayList<>();
         initializeStats(); // 스탯 초기화 메소드 호출
-        scanner.close(); // 스캐너 리소스 해제
     }
 
     private void initializeStats() { //초기 스탯 설정,
