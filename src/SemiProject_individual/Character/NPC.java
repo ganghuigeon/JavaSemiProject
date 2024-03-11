@@ -85,7 +85,7 @@ public class NPC extends Character {
 
     @Override
     public boolean isAlive() {
-        return false;
+        return health > 0;
     }
 
     @Override

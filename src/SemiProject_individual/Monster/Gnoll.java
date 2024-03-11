@@ -8,8 +8,8 @@ public class Gnoll implements Monster {
     private int damage;
     private int armor;
 
-    public Gnoll(String name, int health, int damage) {
-        this.name = name;
+    public Gnoll() {
+        this.name = "Gnoll"; // 이름 설정
         this.health = (int) (Math.random() * 21) + 35; // 35에서 55의 랜덤한 체력을 가질 수 있도록 함
         this.damage = (int) (Math.random() * 15) + 3; // 3에서 15의 랜덤한 데미지을 가질 수 있도록 함
         this.armor = (int) (Math.random() * 2) + 1;
@@ -87,5 +87,15 @@ public class Gnoll implements Monster {
             int droppedGold = (int) (Math.random() * 30) + 5; // 5에서 30의 랜덤한 골드를 떨어뜨림
             System.out.println(this.getName() + "가 " + droppedGold + "골드를 떨어뜨렸습니다.");
         }
+    }
+
+    @Override
+    public boolean isAlive() {
+        return health > 0; // 체력이 0보다 크면 생존 상태임
+    }
+
+    @Override
+    public void attack() {
+
     }
 }

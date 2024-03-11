@@ -6,14 +6,15 @@ public class Item {
     private int attack; // 무기의 공격력
     private int defense; // 방어구의 방어력
     private int durable; // 장비의 내구도
+    private boolean repairable; //착용하고 있는 장비를 수리될 수 있도록 적용
 
-    // 생성자
-    public Item(String name, String type, int attack, int defense, int durable) {
+    public Item(String name, String type, int attack, int defense, int durable, boolean repairable) {
         this.name = name;
         this.type = type;
         this.attack = attack;
         this.defense = defense;
         this.durable = durable;
+        this.repairable = repairable;
     }
 
     public void decreaseDurability() {
@@ -23,7 +24,6 @@ public class Item {
         }
     }
 
-    // 게터 메소드
     public String getName() {
         return name;
     }
@@ -36,7 +36,6 @@ public class Item {
         return attack;
     }
 
-    // 세터 메소드
     public void setName(String name) {
         this.name = name;
     }
@@ -64,26 +63,31 @@ public class Item {
     public void setDurable(int durable) {
         this.durable = durable;
     }
+    public boolean isRepairable() {
+        return repairable;
+    }
 }
+
 
 class Weapon extends Item {
     public Weapon(String name, int attack, int durable) {
-        super(name, "Weapon", attack, 0, durable);
+        super(name, "Weapon", attack, 0, durable, true);
     }
 
     public void wearWeapon() {
         decreaseDurability(); // 내구도 감소
-        System.out.println(this.getName() + "의 내구도가 감소했습니다.");
+        System.out.println("무기의 현재 내구도: " + this.getName());
     }
 }
 
 class Armor extends Item {
     public Armor(String name, int defense, int durable) {
-        super(name, "Armor", 0, defense, durable);
+        super(name, "Armor", 0, defense, durable, true);
     }
 
     public void wearArmor() {
         decreaseDurability(); // 내구도 감소
-        System.out.println(this.getName() + "의 내구도가 감소했습니다.");
+        System.out.println("방어구의 현재 내구도: " + this.getName());
     }
 }
+

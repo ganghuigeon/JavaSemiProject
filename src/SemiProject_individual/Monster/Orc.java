@@ -8,11 +8,11 @@ public class Orc implements Monster {
     private int damage;
     private int armor;
 
-    public Orc(String name, int health, int damage) {
-        this.name = name;
-        this.health = (int) (Math.random() * 21) + 40; // 50에서 60의 랜덤한 체력을 가질 수 있도록 함
+    public Orc() {
+        this.name = "Orc"; // 이름 설정
+        this.health = (int) (Math.random() * 21) + 40; // 40에서 60의 랜덤한 체력을 가질 수 있도록 함
         this.damage = (int) (Math.random() * 16) + 5; // 5에서 20의 랜덤한 데미지을 가질 수 있도록 함
-        this.damage = (int) (Math.random() * 3) + 1;
+        this.armor = (int) (Math.random() * 3) + 1; // 1에서 3의 랜덤한 아머 값을 가질 수 있도록 함
     }
 
     @Override
@@ -87,7 +87,15 @@ public class Orc implements Monster {
             int droppedGold = (int) (Math.random() * 30) + 5; // 5에서 30의 랜덤한 골드를 떨어뜨림
             System.out.println(this.getName() + "가 " + droppedGold + "골드를 떨어뜨렸습니다.");
         }
+    }
 
+    @Override
+    public boolean isAlive() {
+        return health > 0; // 체력이 0보다 크면 생존 상태임
+    }
+
+    @Override
+    public void attack() {
+        System.out.println("오크가 공격합니다.");
     }
 }
-

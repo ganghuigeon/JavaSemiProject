@@ -1,178 +1,164 @@
 package SemiProject_individual.Character;
 
 import SemiProject_individual.Item;
+import SemiProject_individual.Monster.Monster;
+import SemiProject_individual.Repair;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class PC extends Character {
-    private String name; // 캐릭터 이름
-    private int level; // 레벨
+    private String name;
+    private int level;
     private int health;
     private int damage;
     private int armor;
     private int experience;
-    private int vL; // 성향 수치
-    private List<Item> inventory; // 인벤토리
+    private int vL;
+    private List<Item> inventory;
+    private Item equipWeapon;
+    private Item equipArmor;
 
     public PC(String playerName) {
-        this.name = playerName; // playerName을 name에 할당합니다.
-        this.level = 1; // 레벨 초기화
+        this.name = playerName;
+        this.level = 1;
         this.vL = 0;
         this.inventory = new ArrayList<>();
-        initializeStats(); // 스탯 초기화 메소드 호출
+        initializeStats();
     }
 
-    private void initializeStats() { //초기 스탯 설정,
+    private void initializeStats() {
         Random random = new Random();
-        this.health = random.nextInt(50) + 50; // 50에서 100 사이의 랜덤한 값을 선택
-        this.damage = random.nextInt(11) + 5; // 5에서 15 사이의 랜덤한 값을 선택
-        this.armor = random.nextInt(6) + 5; // 5에서 10 사이의 랜덤한 값을 선택
+        this.health = random.nextInt(50) + 50;
+        this.damage = random.nextInt(11) + 5;
+        this.armor = random.nextInt(6) + 5;
         this.experience = 0;
     }
 
     @Override
     public void Virtue(int amount) {
-        // 행동에 따라 선함을 쌓음
         vL += amount;
     }
 
     @Override
     public void Vice(int amount) {
-        // 행동에 따라 악성을 쌓음
         vL -= amount;
     }
 
     @Override
     public void performAction(String action) {
-        // 성향에 따라 할 수 있는 행동이 다름
         if (vL >= 0) {
-            // 선한 성향일 때 가능한 행동
             System.out.println(name + "은(는) 마음이 따스해지는 것을 느낍니다: " + action);
         } else {
-            // 악한 성향일 때 가능한 행동
             System.out.println(name + "은(는) 악의가 전율하는 것을 느낍니다: " + action);
         }
     }
 
-    /**
-     * 플레이어가 대상을 공격하는 메서드
-     *
-     * @param target 공격 대상 Character 객체
-     */
-    public void attack(Character target) {
+    public void attack(Monster target) {
         if (target.isAlive()) {
-            System.out.println(this.name + "이(가) " + target.getName() + "을(를) 공격합니다.");
-            target.takeDamage(this.damage);
+            System.out.println(name + "이(가) " + target.getName() + "을(를) 공격합니다.");
+            target.takeDamage(damage);
         } else {
             System.out.println(target.getName() + "은(는) 이미 사망한 상태입니다.");
         }
     }
 
-    /**
-     * 플레이어가 피해를 받는 메서드
-     *
-     * @param damage 입는 피해량
-     */
     public void takeDamage(int damage) {
-        // 피해량에서 방어력을 뺀 값을 체력에서 감소
-        int actualDamage = Math.max(damage - this.armor, 0);
+        int actualDamage = Math.max(damage - armor, 0);
         this.health -= actualDamage;
-        System.out.println(this.name + "이(가) " + actualDamage + "의 피해를 입었습니다.");
+        System.out.println(name + "이(가) " + actualDamage + "의 피해를 입었습니다.");
 
-        if (!this.isAlive()) {
-            System.out.println(this.name + "이(가) 사망하였습니다.");
+        if (!isAlive()) {
+            System.out.println(name + "이(가) 사망하였습니다.");
         }
     }
 
     @Override
     public int getVL() {
-        return 0;
+        return vL;
     }
 
     @Override
     public boolean isAlive() {
-        return health > 0; // 생존 상태를 확인하여 반환
+        return health > 0;
     }
 
     @Override
     public int getExperience() {
-        return this.experience; // 경험치를 반환
+        return experience;
     }
 
     @Override
     public void adjustExperience(int amount) {
-        // 경험치 조정 메소드
         this.experience += amount;
-        checkLevelUp(); // 레벨 업 체크 메소드 호출
+        checkLevelUp();
     }
 
     private void checkLevelUp() {
-        // 레벨 업 체크 메소드
-        int requiredExperience = level * 100; // 레벨업에 필요한 경험치
+        int requiredExperience = level * 100;
         if (experience >= requiredExperience) {
-            level++; // 레벨 증가
-            increaseStats(); // 스탯 증가 메소드 호출
+            level++;
+            increaseStats();
             System.out.println(name + "이(가) 레벨 업 하였습니다! 현재 레벨: " + level);
         }
     }
 
     private void increaseStats() {
-        // 스탯 증가 메소드 (레벨업 시 호출)
-        this.health += 100; // 체력 증가
-        this.damage += 10; // 공격력 증가
-        this.armor += 5; // 방어력 증가
+        this.health += 100;
+        this.damage += 10;
+        this.armor += 5;
     }
 
     @Override
     public void interactWithGood(Character character) {
-        String interaction = switch (Integer.compare(this.vL, character.getVL())) {
-            case 40 -> this.name + "은(는) " + character.getName() + "을(를)  친근한 모습입니다.";
-            case -40 -> this.name + "은(는) " + character.getName() + "과(와) 대적인 모습입니다.";
-            default -> this.name + "은(는) " + character.getName() + "과(와) 일반적인 대화를 합니다.";
+        String interaction = switch (Integer.compare(vL, character.getVL())) {
+            case 40 -> name + "은(는) " + character.getName() + "을(를)  친근한 모습입니다.";
+            case -40 -> name + "은(는) " + character.getName() + "과(와) 적대적인 모습입니다.";
+            default -> name + "은(는) " + character.getName() + "과(와) 일반적인 대화를 합니다.";
         };
         System.out.println(interaction);
     }
 
     @Override
     public void interactWithBad(Character character) {
-        String interaction = switch (Integer.compare(this.vL, character.getVL())) {
-            case 40 -> this.name + "은(는) " + character.getName() + "을(를) 적대적인 모습입니다.";
-            case -40 -> this.name + "은(는) " + character.getName() + "과(와) 친근한 모습입니다.";
-            default -> this.name + "은(는) " + character.getName() + "과(와) 일반적인 대화를 합니다.";
+        String interaction = switch (Integer.compare(vL, character.getVL())) {
+            case 40 -> name + "은(는) " + character.getName() + "을(를) 적대적인 모습입니다.";
+            case -40 -> name + "은(는) " + character.getName() + "과(와) 친근한 모습입니다.";
+            default -> name + "은(는) " + character.getName() + "과(와) 일반적인 대화를 합니다.";
         };
         System.out.println(interaction);
     }
 
     @Override
     public List<Item> getInventory() {
-        return inventory; // 인벤토리 반환
+        return inventory;
     }
 
     @Override
     public void useInventory(Item item, int quantity) {
-        // 인벤토리를 조작하는 메소드
+        // Implement this method according to the game's requirements
     }
 
     @Override
     public String getName() {
-        return this.name; // 캐릭터 이름 반환
+        return name;
     }
 
     public int getLevel() {
-        return this.level; // 레벨 반환
+        return level;
     }
 
     public int getHealth() {
-        return this.health; // 체력 반환
+        return health;
     }
 
     public int getDamage() {
-        return this.damage; // 공격력 반환
+        return damage;
     }
 
-    public void setHealth(int playerNewHealth) {
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public int getArmor() {
@@ -181,5 +167,55 @@ public class PC extends Character {
 
     public void setArmor(int armor) {
         this.armor = armor;
+    }
+
+    public void printEquippedItems() {
+        System.out.println("Equipped Items:");
+        if (inventory.isEmpty()) {
+            System.out.println("None");
+        } else {
+            for (Item item : inventory) {
+                System.out.println(item.getName());
+            }
+        }
+    }
+
+    private void equipWeapon(Item weapon) {
+        if (equipWeapon != null) {
+            inventory.add(equipWeapon);
+        }
+        equipWeapon = weapon;
+        inventory.remove(weapon);
+        this.damage += weapon.getAttack();
+    }
+
+    private void equipArmor(Item armor) {
+        if (equipArmor != null) {
+            inventory.add(equipArmor);
+        }
+        equipArmor = armor;
+        inventory.remove(armor);
+        this.armor += armor.getDefense();
+    }
+
+    public String getEquipWeapon() {
+        return (equipWeapon != null) ? equipWeapon.getName() : "철검";
+    }
+
+    public String getEquipArmor() {
+        return (equipArmor != null) ? equipArmor.getName() : "원형방패";
+    }
+    public void equip(Item item) {
+        inventory.add(item);
+        System.out.println(item.getName() + "을(를) 착용하였습니다.");
+    }
+
+    public void repairItems(Repair repair) {
+        repair = Repair.getInstance();
+        for (Item item : inventory) {
+            if (item.isRepairable()) {
+                repair.repair(item);
+            }
+        }
     }
 }

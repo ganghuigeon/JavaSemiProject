@@ -8,11 +8,11 @@ public class Goblin implements Monster {
     private int health;
     private int armor;
 
-    public Goblin(String name) {
-        this.name = name;
+    public Goblin() {
+        this.name = "Goblin"; // 이름 설정
         this.health = (int) (Math.random() * 15) + 30; // 30에서 45의 랜덤한 체력을 가질 수 있도록 함
         this.damage = (int) (Math.random() * 7) + 3; // 3에서 10의 랜덤 데미지을 가질 수 있돌고 함
-        this.armor = (int) (Math.random() * 0); // 아머는 증가치가 없으나, 통일성을 위해 추가함
+        this.armor = 0; // 아머는 증가치가 없으므로 0으로 설정
     }
 
     @Override
@@ -55,7 +55,6 @@ public class Goblin implements Monster {
 
     }
 
-
     @Override
     public void attack(PC pc) {
         int playerDamage = this.getDamage(); // 몬스터가 가하는 데미지
@@ -89,4 +88,15 @@ public class Goblin implements Monster {
             System.out.println(this.getName() + "가 " + droppedGold + "골드를 떨어뜨렸습니다.");
         }
     }
+
+    @Override
+    public boolean isAlive() {
+        return health > 0; // 체력이 0보다 크면 생존 상태임
+    }
+
+    @Override
+    public void attack() {
+
+    }
 }
+
